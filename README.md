@@ -64,3 +64,6 @@ By this point i'll probably release it somewhere for people to play (though purp
 - Bug fixes.
 - Balancing.
 - Global leaderboard maybe ?
+
+## Setup:
+Run NPM install in root directory to pull all dependencies.
