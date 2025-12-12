@@ -2,11 +2,13 @@ import Terrain_Data from "./terrain_generator";
 import Terrain_Mesh from "./terrain_visualiser";
 
 export default class Chunk {
-    constructor(handler, scene, chunk_x, chunk_y) {
-        this.handler = handler;
+    constructor(chunk_handler, scene, chunk_x, chunk_y) {
+        this.chunk_handler = chunk_handler;
         this.scene = scene;
         this.chunk_x = chunk_x;
         this.chunk_y = chunk_y;
+        this.absolute_x = chunk_x * CONFIG.CHUNK_SIZE;
+        this.absolute_y = chunk_y * CONFIG.CHUNK_SIZE;
         this.chunk_data = null;
         this.chunk_mesh = null;
     }
@@ -26,7 +28,7 @@ export default class Chunk {
     generate_mesh() {
         // If the chunk data exists for itself and all surrounding chunks //
         if (this.chunk_data) {
-            this.chunk_mesh = new Terrain_Mesh(this.chunk_data, this.scene);
+            this.chunk_mesh = new Terrain_Mesh(this.chunk_data, this.chunk_handler, this.scene);
             return 0;
         } else {
             return 1;

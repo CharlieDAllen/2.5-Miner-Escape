@@ -1,15 +1,19 @@
 import * as THREE from 'three';
+
 import CONFIG from '../../config.js';
+import Chunk_Mesher from "./chunk_mesher.js";
 
 export default class Terrain_Mesh {
 
     // Mesh data contains the position //
-    constructor(mesh_data, scene) {
-        this.mesh_data = mesh_data;
+    constructor(terrain_data, chunk, chunk_handler, scene) {
+        this.terrain_data = terrain_data;
+        this.chunk = chunk;
+        this.chunk_handler = chunk_handler;
+        this.scene = scene;
 
         // Construct the mesh
-        this.mesh = this._construct_mesh(mesh_data);
-        this.scene = scene
+        this.mesh = new Chunk_Mesher(terrain_data, chunk, chunk_handler);
         this.in_scene = false;
     }
 
@@ -24,6 +28,7 @@ export default class Terrain_Mesh {
 
         return 1;
     }
+
 
     _construct_mesh(mesh_data) {
         const data = mesh_data.terrain_data
@@ -105,6 +110,4 @@ export default class Terrain_Mesh {
         const mesh = new THREE.Mesh(geometry, material);
         return mesh;
     }
-
-
 }

@@ -13,7 +13,31 @@ export default class Chunk_Handler {
     // Returns true if the chunk_data for all chunks surrounding on x, y = -1, +1 exists
     // Even if the chunk itself does not exist or has no data //
     chunk_surrounded(chunk) {
-        return true;
+        let chunks = this.chunks
+        let x = chunk.chunk_x;
+        let y = chunk.chunk_y;
+
+        return (
+            chunks[this._chunk_hash(x - 1, y)] != null &&
+            chunks[this._chunk_hash(x + 1, y)] != null &&
+            chunks[this._chunk_hash(x, y - 1)] != null &&
+            chunks[this._chunk_hash(x, y + 1)] != null
+        )
+    }
+
+    // This function returns the cell at the absolute input positions, if it hasn't been generated null is returned //
+    get_cell(abs_x, abs_y) {
+        const chunk_x = Math.floor(abs_x / CONFIG.CHUNK_SIZE);
+        const chunk_y = Math.floor(abs_y / CONFIG.CHUNK_SIZE);
+
+        const rel_x = abs_x % CONFIG.CHUNK_SIZE;
+        const rel_y = abs_y % CONFIG.CHUNK_SIZE;
+
+        const chunk = this.chunks[this._chunk_hash(chunk_x, chunk_y)];
+
+        if (chunk) {
+            return chunk.get_voxel(rel_x, rel_y);
+        }
     }
 
     _chunk_hash(x, y) {

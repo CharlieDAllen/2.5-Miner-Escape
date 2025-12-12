@@ -5,11 +5,11 @@ const CONFIG = {
     MOVE_SPEED: 0.5,
     ZOOM_SPEED: 0.1,
 
-    CHUNK_SIZE: 16,        // Smaller chunks because cells are destroyed and the mesh re-rendered //
+    CHUNK_SIZE: 32,        // Smaller chunks because cells are destroyed and the mesh re-rendered //
     MINE_EXTRUSION: 1,       // Z direction extrusion of the 2.5D effect //
 
-    DATA_DISTANCE: 10,  // How far out the chunk DATA is computed (lower priority than render dist)
-    RENDER_DISTANCE: 8,
+    DATA_DISTANCE: 12,  // How far out the chunk DATA is computed (lower priority than render dist)
+    RENDER_DISTANCE: 10,
 }
 
 export default CONFIG
